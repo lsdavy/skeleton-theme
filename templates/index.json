@@ -9,12 +9,15 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
-      "settings": {}
+    "accordion_dYcYWm": {
+      "type": "accordion",
+      "name": "t:general.accordion",
+      "settings": {
+        "open_first_item": true
+      }
     }
   },
   "order": [
-    "main"
+    "accordion_dYcYWm"
   ]
 }
