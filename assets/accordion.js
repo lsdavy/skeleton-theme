@@ -262,8 +262,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (typeof mobileViewportQuery.addEventListener === 'function') {
             mobileViewportQuery.addEventListener('change', handler);
-        } else if (typeof mobileViewportQuery.addListener === 'function') {
-            mobileViewportQuery.addListener(handler);
+        } else if (typeof mobileViewportQuery.addEventListener === 'function') {
+            mobileViewportQuery.addEventListener(handler);
         }
 
         handler();
