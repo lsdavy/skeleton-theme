@@ -10,6 +10,10 @@
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
+    <link rel="dns-prefetch" href="https://aero-mock-api.vercel.app">
+    <link rel="preconnect" href="https://aero-mock-api.vercel.app">
+    <link rel="preload" as="image" href="https://placehold.co/600x400/thistle/grey?text=Item+1">
+
     {{ content_for_header }}
   </head>
 

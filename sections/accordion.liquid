@@ -1,0 +1,233 @@
+<div class="accordion__section">
+    <div class="container">
+        <div class="accordion__layout is-loading">
+            <div class="accordion__image">
+                <img id="accordion__image" class="accordion__main-image is-placeholder" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-placeholder-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="" loading="eager" decoding="sync" fetchpriority="high" width="700" height="588" sizes="(max-width: 767px) 100vw, 40vw" />
+            </div>
+            <div class="accordion__content">
+                <div class="accordion__heading">
+                    <div class="accordion__overline">
+                        Overline Title
+                    </div>
+                    <h2 class="accordion__title">
+                        Loading Content...
+                    </h2>
+                </div>
+                <div class="accordion__items" id="accordion__items-{{ section.id }}" data-open-first="{{ section.settings.open_first_item | default: false | json }}">
+                <!-- Accordion items will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ 'accordion.js' | asset_url }}" defer></script>
+
+<style>
+:root {
+    --primary-font: 'Inter', sans-serif;
+    --secondary-font: 'Instrument Serif', serif;
+    --primary-color: #333333;
+    --secondary-color: #F8F6F3;
+    --border-color: #191919;
+}
+body {
+    font-family: var(--primary-font);
+    color: var(--primary-color);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.accordion__section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 64px 0;
+}
+.accordion__layout {
+    {% comment %} min-height: 747px; {% endcomment %}
+    display: flex;
+    background: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: opacity 0.3s ease;
+    background-color: #f5f5f5;
+    background-image: linear-gradient(90deg, #f5f5f5 25%, #ededed 37%, #f5f5f5 63%);
+    background-size: 200% 100%;
+
+    @media (max-width: 767px) {
+        min-height: 462px;
+    }
+}
+.accordion__layout > div {
+    flex: 1;   
+}
+.accordion__image {
+    flex: 1 1 40%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    border-right: 1px solid var(--border-color);
+    position: relative;
+    {% comment %} aspect-ratio: 700 / 588; {% endcomment %}
+
+    @media (max-width: 767px) {
+        display: none;
+    }
+}
+.accordion__main-image {
+    width: 100%;
+    height: auto;
+    max-width: 700px;
+    display: block;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    background-color: #f5f5f5;
+    background-image: linear-gradient(90deg, #f5f5f5 25%, #ededed 37%, #f5f5f5 63%);
+    background-size: 200% 100%;
+}
+.accordion__main-image.is-loading {
+    opacity: 1;
+    animation: accordion-loading 1.4s ease-in-out infinite;
+}
+.accordion__main-image.has-image {
+    opacity: 1;
+    background: none;
+    animation: none;
+}
+.accordion__image .accordion__main-image {
+    height: 100%;
+    max-width: none;
+}
+.accordion__panel .accordion__main-image {
+    margin: 0 0 16px;
+}
+.is-loading {
+    opacity: 1;
+    animation: accordion-loading 1.4s ease-in-out infinite;
+}
+@keyframes accordion-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+.accordion__items {
+    display: flex;
+    flex-direction: column;
+}
+.accordion__items .accordion__item {
+    min-height: 69px;
+    border-top: 1px solid var(--border-color);
+    overflow: hidden;
+}
+.accordion__items .accordion__item .accordion__trigger {
+    width: 100%;
+    padding: 26px 32px 22px;
+    font-family: var(--secondary-font);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    @media (max-width: 767px) {
+        padding: 26px 20px 22px;
+    }
+}
+.accordion__items .accordion__item .accordion__trigger::after {
+    content: '+';
+    float: right;
+    font-size: 24px;
+    line-height: 24px;
+    transition: transform 0.3s ease;
+}
+.accordion__items [data-open] .accordion__item .accordion__trigger::after {
+    content: '−';
+}
+.accordion__heading {
+    padding: 40px 32px;
+
+    @media (max-width: 767px) {
+        padding: 40px 20px;
+    }
+}
+.accordion__overline {
+    font-size: 11px;
+    line-height: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+}
+.accordion__title {
+    max-width: 330px;
+    font-family: var(--secondary-font);
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 48px;
+    /*font-size: clamp(32px, 5vw, 40px);
+    line-height: clamp(36px, 5vw, 48px);*/
+     display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    @media (max-width: 767px) {
+        max-width: 270px;
+        font-size: 32px;
+        line-height: 36px;
+    }
+}
+.accordion__title  span {
+    font-style: italic;
+}
+.accordion__panel {
+    padding: 0 32px 40px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    line-height: 20px;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease, margin 0.5s ease;
+
+    @media (max-width: 767px) {
+        padding: 0 20px;
+    }
+}
+.accordion__panel img {
+    margin-bottom: 16px;
+}
+.accordion__panel.hidden {
+    height: 0;
+    margin: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+</style>
+
+{% schema %}
+{
+  "name": "t:general.accordion",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "open_first_item",
+      "label": "Open first accordion item by default",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.accordion"
+    }
+  ]
+}
+{% endschema %}
